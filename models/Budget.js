@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+class Budget extends Model {}
 
-class User extends Model {}
-
-User.init(
+Budget.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,16 +11,13 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    budget_date: {
+        type: DataTypes.DATE,
+        allowNull: false,    
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [8],
-      },
+    amount: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,    
     },
   },
   {
@@ -29,8 +25,8 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user',
+    modelName: 'budget',
   }
 );
 
-module.exports = User;
+module.exports = Budget;

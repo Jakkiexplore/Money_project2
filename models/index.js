@@ -1,7 +1,33 @@
 const User = require("./User.js");
-const Blog = require("./Category.js");
-const Comment = require("./Expense.js");
+const Category = require("./Category.js");
+const Expense = require("./Expense.js");
+const Budget = require("./Budget.js");
 
-// add references later
+// Expense belongsTo Category
+Expense.belongsTo(User, {
+  foreignKey: "user_id",
+});
 
-module.exports = { User, Blog, Comment };
+// Categories have many expenses
+User.hasMany(Expense, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+
+// Expense belongsTo Category
+Expense.belongsTo(Category, {
+  foreignKey: "category_id",
+});
+
+// Categories have many expenses
+Category.hasMany(Expense, {
+  foreignKey: "category_id",
+  onDelete: "CASCADE",
+});
+
+module.exports = {
+  User,
+  Category,
+  Budget,
+  Expense,
+};
