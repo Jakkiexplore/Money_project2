@@ -1,0 +1,86 @@
+[
+  {
+    "category_id": 3,
+    "user_id": 1,
+    "description": "Gift to friend",
+    "amount": 10.01,
+    "transaction_date": "2023-12-10T10:00:00Z"
+  },
+  {
+    "category_id": 10,
+    "user_id": 1,
+    "description": "Groceries",
+    "amount": 35.50,
+    "transaction_date": "2023-12-10T12:30:00Z"
+  },
+  {
+    "category_id": 10,
+    "user_id": 2,
+    "description": "Dinner",
+    "amount": 50.75,
+    "transaction_date": "2023-12-11T18:45:00Z"
+  },
+  {
+    "category_id": 11,
+    "user_id": 3,
+    "description": "Movie tickets",
+    "amount": 20.00,
+    "transaction_date": "2023-12-12T20:15:00Z"
+  },
+  {
+    "category_id": 15,
+    "user_id": 1,
+    "description": "Gasoline",
+    "amount": 45.30,
+    "transaction_date": "2023-12-13T09:00:00Z"
+  },
+  {
+    "category_id": 3,
+    "user_id": 2,
+    "description": "Birthday gift",
+    "amount": 30.00,
+    "transaction_date": "2023-12-14T15:30:00Z"
+  },
+  {
+    "category_id": 10,
+    "user_id": 3,
+    "description": "Weekly groceries",
+    "amount": 40.20,
+    "transaction_date": "2023-12-15T11:45:00Z"
+  },
+  {
+    "category_id": 10,
+    "user_id": 1,
+    "description": "Lunch with friends",
+    "amount": 25.50,
+    "transaction_date": "2023-12-16T13:00:00Z"
+  },
+  {
+    "category_id": 15,
+    "user_id": 2,
+    "description": "Car maintenance",
+    "amount": 80.75,
+    "transaction_date": "2023-12-17T14:15:00Z"
+  },
+  {
+    "category_id": 11,
+    "user_id": 3,
+    "description": "Concert tickets",
+    "amount": 60.00,
+    "transaction_date": "2023-12-18T19:00:00Z"
+  },
+  {
+    "category_id": 3,
+    "user_id": 1,
+    "description": "Holiday gift",
+    "amount": 15.50,
+    "transaction_date": "2023-12-19T17:30:00Z"
+  },
+  {
+    "category_id": 3,
+    "user_id": 1,
+    "description": "Salary",
+    "amount": 15.50,
+    "transaction_date": "2023-12-19T17:30:00Z"
+  }
+]

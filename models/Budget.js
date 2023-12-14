@@ -12,12 +12,10 @@ Budget.init(
       autoIncrement: true,
     },
     budget_date: {
-        type: DataTypes.DATE,
-        allowNull: false,    
+        type: DataTypes.DATE,   
     },
     amount: {
         type: DataTypes.DECIMAL,
-        allowNull: false,    
     },
   },
   {
