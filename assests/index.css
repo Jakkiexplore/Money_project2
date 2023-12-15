@@ -27,6 +27,7 @@ html, body{
 .background{
     background-size: cover;
     height: 100%;
+    position: fixed;
 }
 footer{
     position: fixed;
