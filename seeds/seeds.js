@@ -16,22 +16,22 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  await Category.bulkCreate(userData, {
+  await Category.bulkCreate(categoryData, {
     individualHooks: true,
     returning: true,
   });
 
-  await Expense.bulkCreate(userData, {
+  await Expense.bulkCreate(expenseData, {
     individualHooks: true,
     returning: true,
   });
 
-  await Budget.bulkCreate(userData, {
+  await Budget.bulkCreate(budgetData, {
     individualHooks: true,
     returning: true,
   });
 
-  await Income.bulkCreate(userData, {
+  await Income.bulkCreate(incomeData, {
     individualHooks: true,
     returning: true,
   });
