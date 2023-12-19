@@ -461,8 +461,98 @@ main .recent-purchase a {
 @keyframes pulse {
     from {
         transform: scale(1);
-        box-shadow: 0 0 10px rgba(236, 115, 185, 0.8);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.796);
         border-radius: 50%;
     }
     
+}
+
+
+
+
+
+.right {
+    margin-top: 22px;
+}
+
+.right .top{
+    display: flex;
+    justify-content: end;
+    gap: 36px;
+    margin-top: 22px;
+    position: absolute;
+    left: 73%;
+    
+}
+
+.right .top button {
+    display: none;
+}
+
+.right .theme-toggler {
+    background: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+    width: 67px;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+}
+
+.right .theme-toggler span {
+    font-size: 19px;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.right .theme-toggler span.active {
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+.right .top .profile {
+    display: flex;
+    gap: 32px;
+    text-align: right;
+}
+
+
+
+
+
+.right .recent-updates {
+    margin-top: 16px;
+    position: absolute;
+    left: 70%;
+    bottom: 13%;
+}
+
+.right .recent-updates h2 {
+    margin-bottom: 13px;
+}
+
+.right .recent-updates .updates {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    
+}
+
+.right .recent-updates .updates:hover {
+    box-shadow: none;
+}
+
+.right .recent-updates .updates .update {
+    display: grid;
+    grid-template-columns: 42px auto;
+    gap: 16px;
+    margin-bottom: 16px;
 }
