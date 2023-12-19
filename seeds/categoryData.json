@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Home Improvement",
+    "type": "Expense"
+  },
+  {
+    "name": "Healthcare",
+    "type": "Expense"
+  },
+  {
+    "name": "Gifts",
+    "type": "Expense"
+  },
+  {
+    "name": "Rent",
+    "type": "Expense"
+  },
+  {
+    "name": "Utilities",
+    "type": "Expense"
+  },
+  {
+    "name": "Insurance",
+    "type": "Expense"
+  },
+  {
+    "name": "Housing",
+    "type": "Expense"
+  },
+  {
+    "name": "Taxes",
+    "type": "Expense"
+  },
+  {
+    "name": "Debt",
+    "type": "Expense"
+  },
+  {
+    "name": "Food",
+    "type": "Expense"
+  },
+  {
+    "name": "Entertainment",
+    "type": "Expense"
+  },
+  {
+    "name": "Salary",
+    "type": "Income"
+  },
+  {
+    "name": "Interest",
+    "type": "Income"
+  },
+  {
+    "name": "Capital Gains",
+    "type": "Income"
+  },
+  {
+    "name": "Car",
+    "type": "Expense"
+  }
+]
