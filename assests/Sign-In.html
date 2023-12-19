@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <title> Client logIn and registration form </title>
+    <style>
+ html, body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+}
+.background{
+background-size: cover;
+background-position: center;
+display: flex;
+z-index: 1;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  margin: auto;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: rgb(175, 163, 76);
+  color: rgb(217, 193, 149);
+  border: none;
+  cursor: pointer;
+}
+  
+footer{
+    position: fixed;
+    bottom: 0;
+}
+    </style>
+  </head>
+
+  <body>
+    <main>
+        <div class="background">
+            <img src="./images/white-background-with-orange-geometric.jpg" alt="rolled dollars coins stack table ">
+       </div>
+        <div class="container">
+            <h2>Login Form</h2>
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>                          
+                <input type="password" id="password" name="password" required>
+              </div>
+              <a class="Register" href="#"> Register </a> <br>
+              <a class="Password-reset" href="#"> Forgot Password </a> <br>
+              <button type="submit">Login</button>
+            </form>
+          </div>
+    </main>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // To revent form submission
+
+  // Get input values
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  // Perform login validation (example: check if username is "admin" and password is "password")
+  if (username === "admin" && password === "password") {
+    alert("Login successful!");
+    // Redirect to another page or perform other actions
+  } else {
+    alert("Invalid username or password. Please try again.");
+  }
+});
+    </script>
+    <footer>
+        @ THE MONEY PROJECT
+    </footer>
+  </body>
+  
