@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Budget, Income, Expense } = require('../models');
 
 
 router.get('/', async (req, res) => {
@@ -39,9 +39,15 @@ router.get('/dashboard', async (req, res) => {
 
 router.get('/budget', async (req, res) => {
   try {
+    const budgetData = await Budget.findAll();
+    const budgets = budgetData.map((budget) =>
+    budget.get({ plain: true })
+  );
+    console.log(req.session)
     res.render('budget', {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg'
+      backgroundImage: '/images/background-img.jpg',
+      budgets
     });
   } catch (err) {
     res.status(500).json(err);
@@ -50,17 +56,42 @@ router.get('/budget', async (req, res) => {
 
 router.get('/income', async (req, res) => {
   try {
+    console.log(req.session)
+    const incomeData = await Income.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+  });
+  console.log(incomeData)
+
+    const incomes = incomeData.map((income) =>
+    income.get({ plain: true })
+  );
     res.render('income', {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg'
+      backgroundImage: '/images/background-img.jpg',
+      incomes
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.render('income', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/background-img.jpg',
+  
+    });
   }
 });
 
 router.get('/expense', async (req, res) => {
   try {
+    const expenseData = await Expense.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+  });
+  
+    const expenses = expenseDataData.map((expense) =>
+    expense.get({ plain: true })
+  );
     res.render('expense', {
       loggedIn: req.session.loggedIn,
       backgroundImage: '/images/background-img.jpg'
