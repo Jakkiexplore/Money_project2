@@ -89,10 +89,11 @@ router.get('/expense', async (req, res) => {
       },
   });
   
-    const expenses = expenseDataData.map((expense) =>
+    const expenses = expenseData.map((expense) =>
     expense.get({ plain: true })
   );
     res.render('expense', {
+      expenses: expenses, 
       loggedIn: req.session.loggedIn,
       backgroundImage: '/images/background-img.jpg'
     });
