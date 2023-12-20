@@ -59,10 +59,10 @@ router.get('/income', async (req, res) => {
     console.log(req.session)
     const incomeData = await Income.findAll({
       where: {
-        user_id: req.session.user_id
+        user_id: req.session.userid
       },
   });
-  console.log(incomeData)
+  console.log(incomeData);
 
     const incomes = incomeData.map((income) =>
     income.get({ plain: true })
@@ -85,16 +85,17 @@ router.get('/expense', async (req, res) => {
   try {
     const expenseData = await Expense.findAll({
       where: {
-        user_id: req.session.user_id
+        user_id: req.session.userid
       },
   });
   
-    const expenses = expenseDataData.map((expense) =>
+    const expenses = expenseData.map((expense) =>
     expense.get({ plain: true })
   );
     res.render('expense', {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg'
+      backgroundImage: '/images/background-img.jpg',
+      expenses
     });
   } catch (err) {
     res.status(500).json(err);
