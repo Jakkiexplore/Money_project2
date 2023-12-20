@@ -4,55 +4,72 @@ const { User } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-   
-    // Pass serialized data and session flag into template
-    res.render('login')
+    res.render('home',{
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/home-back-img.jpg'
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+router.get('/home', async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
-
-    const project = projectData.get({ plain: true });
-
-    res.render('project', {
-      ...project,
-      logged_in: req.session.logged_in
+    res.render('home', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/home-back-img.jpg'
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/profile', async (req, res) => {
+router.get('/dashboard', async (req, res) => {
+ 
+
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true
+    res.render('dashboard', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/background-img.jpg'
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+router.get('/budget', async (req, res) => {
+  try {
+    res.render('budget', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/background-img.jpg'
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/income', async (req, res) => {
+  try {
+    res.render('income', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/background-img.jpg'
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/expense', async (req, res) => {
+  try {
+    res.render('expense', {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: '/images/background-img.jpg'
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -61,7 +78,21 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', {
+    backgroundImage: '/images/home-back-img.jpg'
+  });
+});
+
+router.get('/signup', (req, res) => {
+  // If the user is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // Otherwise, render the 'signup' template
+  res.render('signup', {
+    backgroundImage: '/images/home-back-img.jpg'
+  });
 });
 
 module.exports = router;
