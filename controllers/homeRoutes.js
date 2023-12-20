@@ -176,6 +176,7 @@ router.get("/expense", async (req, res) => {
     expense.get({ plain: true })
   );
     res.render('expense', {
+      expenses: expenses, 
       loggedIn: req.session.loggedIn,
       backgroundImage: '/images/background-img.jpg',
       expenses
