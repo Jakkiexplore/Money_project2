@@ -42,8 +42,8 @@
     {{#each budgets as |budget|}}
 
     <tr>
-        <td>{{budget.amount}}</td>
-        <td>{{budget.budget_date}}</td>
+        <td>{{formatCurrency budget.amount}}</td>
+        <td>{{formatDate budget.budget_date "MMM YYYY"}}</td>
     
     </tr>
     {{/each}}

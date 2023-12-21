@@ -34,24 +34,28 @@
 
 <div class="table-container">
     <h2>INCOME</h2>
-<table>
-    <tr>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>Date</th>
-    </tr>
-    {{#each incomes as |income|}}
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        {{#each incomes as |income|}}
 
-    <tr>
-        <td>{{income.category.name}}</td>
-        <td>{{income.description}}</td>
-        <td>{{income.amount}}</td>
-        <td>{{income.transaction_date}}</td>
-    
-    </tr>
-    {{/each}}
-   
-</table>
+        <tr>
+            <td>{{income.category.name}}</td>
+            <td>{{income.description}}</td>
+            <td>{{formatCurrency income.amount}}</td>
+            <td>{{formatDate income.transaction_date "ddd MMM DD YYYY"}}</td>
+             <td><a class="delete-button" href="/income-delete/{{income.id}}">Delete</a></td>
+        </tr>
+        {{/each}}
+    </table>
+<div>
+<a class="add-button" href="/income-add">Add Income</a>
 </div>
+</div>
+
 

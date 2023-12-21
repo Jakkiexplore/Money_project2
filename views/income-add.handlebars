@@ -1,0 +1,34 @@
+<div class="box-card">
+  <h2 class="page-title">ADD INCOME</h2>
+  <form class="form income-form">
+    <input type="hidden" id="user-id" value="{{userId}}">
+    <div class="form-group">
+      <label>Category*</label>
+        <select id="category-selection">
+            {{#each categories as |category|}}
+            <option value={{category.id}}>{{category.name}}</option>
+             {{/each}}
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="income-description">Description*</label>
+      <input class="form-input" id="income-description" placeholder="required"/>
+    </div>
+
+    <div class="form-group">
+      <label for="income-amount">Amount*</label>
+      <input class="form-input" id="income-amount" placeholder="required"/>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary add-button" type="submit">Add</button>
+      <button class="btn btn-primary cancel-button" onclick="cancelForm()">Cancel</button>
+    </div>
+  </form>
+</div>
+<script>
+  function cancelForm() {
+    // Navigate back to the previous page
+    window.history.back();
+  }
+</script>
+<script src="./js/income-add.js"></script>
