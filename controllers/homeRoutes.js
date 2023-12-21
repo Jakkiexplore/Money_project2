@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { User, Budget, Income, Expense, Category } = require('../models');
+const router = require("express").Router();
+const { User, Budget, Income, Expense, Category } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
@@ -31,11 +31,11 @@ router.get("/dashboard", async (req, res) => {
       {
         data: [30, 25, 20, 10, 14],
         backgroundColor: [
-          "#9ACD32",
-          "#FFA07A",
-          "#ADD8E6",
-          "#FFE4B5",
-          "#B0C4DE",
+          "rgba(154, 205, 50, 0.6)",  
+          "rgba(255, 160, 122, 0.6)",  
+          "rgba(173, 216, 230, 0.6)",  
+          "rgba(255, 228, 181, 0.6)", 
+          "rgba(176, 196, 222, 0.6)", 
         ],
       },
     ],
@@ -47,7 +47,7 @@ router.get("/dashboard", async (req, res) => {
     datasets: [
       {
         data: [50, 10, 40],
-        backgroundColor: ["#FFA07A", "#87CEEB", "#D2B48C"],
+        backgroundColor: ["rgba(255, 160, 122, 0.6)", "rgba(135, 206, 235, 0.6)", "rgba(210, 180, 140, 0.6)"],
       },
     ],
   };
@@ -107,12 +107,40 @@ router.get("/dashboard", async (req, res) => {
   };
   // ------------
 
+  //-----line chart
+  const lineChartData = {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    datasets: [
+      {
+        label: "INCOME TREND",
+        data: [65, 59, 80, 81, 56, 55, 40, 34, 67, 34, 78, 85],
+        fill: false,
+        borderColor: "yellow",
+        tension: 0.1,
+      },
+    ],
+  };
+
   try {
     res.render("dashboard", {
       loggedIn: req.session.loggedIn,
       expenseChartData,
       incomeChartData,
       barGraphData,
+      lineChartData,
       backgroundImage: "/images/background-img.jpg",
     });
   } catch (err) {
@@ -123,14 +151,12 @@ router.get("/dashboard", async (req, res) => {
 router.get("/budget", async (req, res) => {
   try {
     const budgetData = await Budget.findAll();
-    const budgets = budgetData.map((budget) =>
-    budget.get({ plain: true })
-  );
-    console.log(req.session)
-    res.render('budget', {
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+    console.log(req.session);
+    res.render("budget", {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg',
-      budgets
+      backgroundImage: "/images/background-img.jpg",
+      budgets,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -139,28 +165,26 @@ router.get("/budget", async (req, res) => {
 
 router.get("/income", async (req, res) => {
   try {
-    console.log(req.session)
+    console.log(req.session);
     const incomeData = await Income.findAll({
-      include: [{model: Category}],
+      include: [{ model: Category }],
       where: {
-        user_id: req.session.userid
+        user_id: req.session.userid,
       },
-  });
-  console.log(incomeData);
+    });
+    console.log(incomeData);
 
-    const incomes = incomeData.map((income) =>
-    income.get({ plain: true })
-  );
-    res.render('income', {
+    const incomes = incomeData.map((income) => income.get({ plain: true }));
+    res.render("income", {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg',
-      incomes
+      backgroundImage: "/images/background-img.jpg",
+      incomes,
     });
   } catch (err) {
-    res.render('income', {
+    console.log(err);
+    res.render("income", {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg',
-  
+      backgroundImage: "/images/background-img.jpg",
     });
   }
 });
@@ -168,24 +192,34 @@ router.get("/income", async (req, res) => {
 router.get("/expense", async (req, res) => {
   try {
     const expenseData = await Expense.findAll({
-      include: [{model: Category}],
+      include: [{ model: Category }],
       where: {
-        user_id: req.session.userid
+        user_id: req.session.userid,
       },
-  });
-  
-    const expenses = expenseData.map((expense) =>
-    expense.get({ plain: true })
-  );
-    res.render('expense', {
-      expenses: expenses, 
+    });
+
+    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+    res.render("expense", {
       loggedIn: req.session.loggedIn,
-      backgroundImage: '/images/background-img.jpg',
-      expenses
+      backgroundImage: "/images/background-img.jpg",
+      expenses,
     });
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get("/income-add", (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  // if (req.session.logged_in) {
+  //   res.redirect("/profile");
+  //   return;
+  // }
+
+  res.render("income-add", {
+    loggedIn: req.session.loggedIn,
+    backgroundImage: "/images/background-img.jpg",
+  });
 });
 
 router.get("/login", (req, res) => {
