@@ -168,7 +168,7 @@ nav a {
 
 /*****CHARTS*****/
   .auth-option {
-    color: black ;
+    color: rgb(0, 0, 0) ;
   }
 
   .auth-option:hover {
