@@ -1,12 +1,26 @@
 <style>
+    .table-container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+    }
+
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-    td,
     th {
+        border: 1px solid #dddddd;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    td {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
@@ -18,7 +32,8 @@
 </style>
 
 
-
+<div class="table-container">
+    <h2>BUDGET</h2>
 <table>
     <tr>
         <th>Amount</th>
@@ -34,3 +49,4 @@
     {{/each}}
    
 </table>
+</div>
