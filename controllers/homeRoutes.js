@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Budget, Income, Expense } = require('../models');
+const { User, Budget, Income, Expense, Category } = require('../models');
 
 router.get("/", async (req, res) => {
   try {
@@ -72,7 +72,7 @@ router.get("/dashboard", async (req, res) => {
     datasets: [
       {
         label: "MONTHLY EXPENSE",
-        data: [65, 59, 80, 81, 56, 55, 40, 70, 65, 90, 58, 68],
+        data: [65, 59, 80, 81, 56, 55, 40, 70, 65, 72, 58, 68],
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
           "rgba(255, 159, 64, 0.6)",
@@ -141,6 +141,7 @@ router.get("/income", async (req, res) => {
   try {
     console.log(req.session)
     const incomeData = await Income.findAll({
+      include: [{model: Category}],
       where: {
         user_id: req.session.userid
       },
@@ -167,6 +168,7 @@ router.get("/income", async (req, res) => {
 router.get("/expense", async (req, res) => {
   try {
     const expenseData = await Expense.findAll({
+      include: [{model: Category}],
       where: {
         user_id: req.session.userid
       },
