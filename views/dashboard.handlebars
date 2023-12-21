@@ -1,15 +1,20 @@
 <div class="chart-area">
-<div class="chart-section">
-  <div>
-    <canvas id="incomePieChart" width="400" height="400"></canvas>
+  <div class="charts">
+    <div>
+      <canvas id="incomePieChart" width="450" height="450"></canvas>
+    </div>
+    <div>
+      <canvas id="expensePieChart" width="450" height="450"></canvas>
+    </div>
   </div>
-  <div>
-    <canvas id="expensePieChart" width="400" height="400"></canvas>
+  <div class="charts">
+    <div>
+      <canvas id="lineChart" width="450" height="450"></canvas>
+    </div>
+    <div>
+      <canvas id="barChart" width="450" height="450"></canvas>
+    </div>
   </div>
-</div>
-<div class="bar-section">
-    <canvas id="barChart" width="700" height="700"></canvas>
-</div>
 </div>
 <script>
   // Client-side Chart.js code
@@ -25,6 +30,10 @@
                 position: "bottom",
                 labels: {
                   color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
                 },
               },
               title: {
@@ -50,6 +59,10 @@
                 position: "bottom",
                 labels: {
                   color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
                 },
               },
               title: {
@@ -72,19 +85,74 @@
             scales: {
               x: {
                 ticks: {
-                  color: "white", // X-axis tick color
+                  color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
                 },
                 grid: {
-                  color: "white", // X-axis grid line color
+                  color: "white", 
                 },
               },
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: "white", // Y-axis tick color
+                  color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
                 },
                 grid: {
-                  color: "white", // X-axis grid line color
+                  color: "white", 
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: "white",
+                  font: {
+                    weight: "bold",
+                    size: 25,
+                  }, // Legend text color
+                },
+              },
+            },
+          },
+        });
+
+        var line = document.getElementById("lineChart").getContext("2d");
+        new Chart(line, {
+            type: 'line',
+            data: {{{json lineChartData}}},
+            options: {
+              pointBackgroundColor: "rgba(255, 99, 132, 1)",
+            scales: {
+              x: {
+                ticks: {
+                  color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
+                },
+                grid: {
+                  color: "white",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: "white",
+                  font: {
+                    size: 14,
+                    weight: "bold"
+                  }
+                },
+                grid: {
+                  color: "white",
                 },
               },
             },
