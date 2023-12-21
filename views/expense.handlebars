@@ -1,12 +1,26 @@
 <style>
+    .table-container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+    }
+
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-    td,
     th {
+        border: 1px solid #dddddd;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    td {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
@@ -18,9 +32,11 @@
 </style>
 
 
-
+<div class="table-container">
+    <h2>EXPENSE</h2>
 <table>
     <tr>
+        <th>Category</th>
         <th>Description</th>
         <th>Amount</th>
         <th>Date</th>
@@ -28,6 +44,7 @@
     {{#each expenses as |expense|}}
 
     <tr>
+        <td>{{expense.category.name}}</td>
         <td>{{expense.description}}</td>
         <td>{{expense.amount}}</td>
         <td>{{expense.transaction_date}}</td>
@@ -36,5 +53,7 @@
     {{/each}}
    
 </table>
+</div>
+
 
 
