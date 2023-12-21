@@ -34,25 +34,28 @@
 
 <div class="table-container">
     <h2>EXPENSE</h2>
-<table>
-    <tr>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>Date</th>
-    </tr>
-    {{#each expenses as |expense|}}
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        {{#each expenses as |expense|}}
 
-    <tr>
-        <td>{{expense.category.name}}</td>
-        <td>{{expense.description}}</td>
-        <td>{{expense.amount}}</td>
-        <td>{{expense.transaction_date}}</td>
-    
-    </tr>
-    {{/each}}
-   
-</table>
+        <tr>
+            <td>{{expense.category.name}}</td>
+            <td>{{expense.description}}</td>
+            <td>{{formatCurrency expense.amount}}</td>
+            <td>{{formatDate expense.transaction_date "ddd MMM DD YYYY"}}</td>
+            <td><a class="delete-button" href="/expense-delete/{{expense.id}}">Delete</a></td>
+        </tr>
+        {{/each}}
+    </table>
+<div>
+<a class="add-button" href="/expense-add">Add Expense</a>
+</div>
 </div>
 
 

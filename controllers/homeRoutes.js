@@ -152,7 +152,7 @@ router.get("/budget", async (req, res) => {
   try {
     const budgetData = await Budget.findAll();
     const budgets = budgetData.map((budget) => budget.get({ plain: true }));
-    console.log(req.session);
+  
     res.render("budget", {
       loggedIn: req.session.loggedIn,
       backgroundImage: "/images/background-img.jpg",
@@ -165,16 +165,15 @@ router.get("/budget", async (req, res) => {
 
 router.get("/income", async (req, res) => {
   try {
-    console.log(req.session);
     const incomeData = await Income.findAll({
       include: [{ model: Category }],
       where: {
-        user_id: req.session.userid,
+        user_id: req.session.userId,
       },
     });
-    console.log(incomeData);
-
+  
     const incomes = incomeData.map((income) => income.get({ plain: true }));
+
     res.render("income", {
       loggedIn: req.session.loggedIn,
       backgroundImage: "/images/background-img.jpg",
@@ -194,13 +193,14 @@ router.get("/expense", async (req, res) => {
     const expenseData = await Expense.findAll({
       include: [{ model: Category }],
       where: {
-        user_id: req.session.userid,
+        user_id: req.session.userId,
       },
     });
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
     res.render("expense", {
       loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
       backgroundImage: "/images/background-img.jpg",
       expenses,
     });
@@ -209,18 +209,128 @@ router.get("/expense", async (req, res) => {
   }
 });
 
-router.get("/income-add", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  // if (req.session.logged_in) {
-  //   res.redirect("/profile");
-  //   return;
-  // }
+router.get("/income-add", async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      where: {
+        type: "Income"
+      },
+    });
+  
+    const categories = categoryData.map((category) => category.get({ plain: true }));
+  
+    res.render("income-add", {
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+      categories,
+      backgroundImage: "/images/background-img.jpg",
+    });
 
-  res.render("income-add", {
-    loggedIn: req.session.loggedIn,
-    backgroundImage: "/images/background-img.jpg",
-  });
+  } catch(err) {
+    res.render("income-add", {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: "/images/background-img.jpg",
+    });
+  }
+  
 });
+
+router.get("/income-delete/:id", async (req, res) => {
+  try {
+    const incomeData = await Income.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!incomeData) {
+      res.status(404).json({ message: 'No income found with this id!' });
+      return;
+    }
+
+    const dbData = await Income.findAll({
+      include: [{ model: Category }],
+      where: {
+        user_id: req.session.userId,
+      },
+    });
+  
+    const incomes = dbData.map((income) => income.get({ plain: true }));
+
+
+    res.render("income", {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: "/images/background-img.jpg",
+      incomes,
+    });
+
+  } catch (err) {
+    console.error('Error deleting income:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get("/expense-add", async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      where: {
+        type: "Expense"
+      },
+    });
+  
+    const categories = categoryData.map((category) => category.get({ plain: true }));
+  
+    res.render("expense-add", {
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+      categories,
+      backgroundImage: "/images/background-img.jpg",
+    });
+
+  } catch(err) {
+    res.render("expense-add", {
+      loggedIn: req.session.loggedIn,
+      backgroundImage: "/images/background-img.jpg",
+    });
+  }
+});
+
+router.get("/expense-delete/:id", async (req, res) => {
+  // delete a expense by its `id` value
+  try {
+    const expenseData = await Expense.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!expenseData) {
+      res.status(404).json({ message: 'No expense found with this id!' });
+      return;
+    }
+
+    const dbData = await Expense.findAll({
+      include: [{ model: Category }],
+      where: {
+        user_id: req.session.userId,
+      },
+    });
+
+    const expenses = dbData.map((expense) => expense.get({ plain: true }));
+    res.render("expense", {
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+      backgroundImage: "/images/background-img.jpg",
+      expenses,
+    });
+  } catch (err) {
+    console.error('Error deleting expense:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route

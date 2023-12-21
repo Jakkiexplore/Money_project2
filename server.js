@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const Chart = require('chart.js/auto');
+const moment = require('moment');
 
 const routes = require('./controllers');
 const sequelize = require("./config/connection");
@@ -17,6 +18,12 @@ const hbs = exphbs.create({
   helpers: {
     json: function (context) {
       return JSON.stringify(context);
+    },
+    formatCurrency: function (amount) {
+      return '$'+ amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    },
+    formatDate: function (date, format) {
+      return moment(date).format(format);
     },
   },
 });
